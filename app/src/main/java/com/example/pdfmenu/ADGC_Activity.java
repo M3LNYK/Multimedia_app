@@ -1,6 +1,5 @@
 package com.example.pdfmenu;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +23,9 @@ import com.example.pdfmenu.dataBase.Dish.Dish;
 import com.example.pdfmenu.dataBase.Dish.DishListAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class ADGC_Activity extends AppCompatActivity {
 
@@ -91,7 +92,6 @@ public class ADGC_Activity extends AppCompatActivity {
 
 //        For item in List
         setOnClickListener();
-
         initSearchWidgets();
     }
 
@@ -150,6 +150,18 @@ public class ADGC_Activity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
+
+                ArrayList<Dish> filteredDish = new ArrayList<Dish>();
+                for (Dish dish : Dish.nonDeletedDishes()){
+                    if(dish.getName().toLowerCase().contains(s.toLowerCase())){
+                        filteredDish.add(dish);
+
+                    }
+                }
+
+                DishListAdapter adapter = new DishListAdapter(getApplicationContext(), R.layout.adapter_view_layout, filteredDish);
+                mListView.setAdapter(adapter);
+
                 return false;
             }
         });
@@ -281,10 +293,10 @@ public class ADGC_Activity extends AppCompatActivity {
             sqLiteManager.updateDishInDB(selectedDish);
         }
         setDishAdapter();
-        finish();
+        close_popup();
     }
 
-    public void finish(){
+    public void close_popup(){
         if (mDialog != null) {
             mDialog.hide();
         }
@@ -298,6 +310,6 @@ public class ADGC_Activity extends AppCompatActivity {
         SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
         sqLiteManager.updateDishInDB(selectedDish);
         setDishAdapter();
-        finish();
+        close_popup();
     }
 }
