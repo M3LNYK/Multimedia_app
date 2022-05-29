@@ -153,6 +153,8 @@ public class ADGC_Activity extends AppCompatActivity {
         sqLiteManager.populateDishListArray();
     }
 
+    
+
 //    private void setOnClickListener(){
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
