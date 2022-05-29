@@ -15,14 +15,57 @@
 
     </SearchView>
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleLine="true">
+
+            <!-- Chips can be declared here, or added dynamically. -->
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/All"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_select_drinks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Drinks"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_select_appetizers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Appetizers"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_select_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Main_Dish"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_select_specials"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Season_specials"/>
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
 
     <ListView
         android:id="@+id/menu_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="45dp"
-        >
-
+        android:layout_marginTop="90dp">
 
 
     </ListView>
@@ -37,9 +80,9 @@
             android:id="@+id/floating_continue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="315dp"
             android:layout_marginTop="490dp"
             android:layout_marginRight="24dp"
-            android:layout_marginLeft="315dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:focusable="true"
@@ -50,9 +93,9 @@
             android:id="@+id/floating_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="315dp"
             android:layout_marginTop="550dp"
             android:layout_marginRight="24dp"
-            android:layout_marginLeft="315dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:focusable="true"
@@ -63,12 +106,12 @@
             android:id="@+id/floating_open"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:layout_marginTop="620dp"
             android:layout_marginLeft="315dp"
+            android:layout_marginTop="620dp"
+            android:layout_marginBottom="24dp"
             android:contentDescription="Add dish"
-            app:backgroundTint="@color/secondaryColor"
             android:focusable="true"
+            app:backgroundTint="@color/secondaryColor"
             app:srcCompat="@drawable/ic_add" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

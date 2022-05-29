@@ -20,4 +20,9 @@
         <item>Main Dish</item>
         <item>Season Specials</item>
     </string-array>
+    <string name="Drinks">Drinks</string>
+    <string name="Appetizers">Appetizers</string>
+    <string name="Main_Dish">Main Dish</string>
+    <string name="Season_specials">Season specials</string>
+    <string name="All">All</string>
 </resources>
