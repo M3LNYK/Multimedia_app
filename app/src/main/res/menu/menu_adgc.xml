@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    <item-->
+<!--        android:id="@+id/item_add_dish"-->
+<!--        android:title="Add dish"-->
+<!--        android:icon="@drawable/ic_add_24"-->
+<!--        app:showAsAction="always"-->
+<!--        />-->
+
+    <item
+        android:id="@+id/item_delete_dish"
+        android:title="Delete dishes"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/item_organize_dish"
+        android:title="Organize dishes"
+        app:showAsAction="never"
+        />
+
+</menu>

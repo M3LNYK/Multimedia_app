@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.151" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/drawable/ic_add.xml" value="0.151" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/drawable/ic_add_24.xml" value="0.249" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/drawable/ic_add_menu.xml" value="0.151" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.249" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.2735" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/drawable/ic_edit_note.xml" value="0.151" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.151" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/activity_add_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/activity_adgc.xml" value="0.25" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/activity_create_menu.xml" value="0.22" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/activity_template_menu.xml" value="0.22" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/adapter_view_layout.xml" value="0.25" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/content_main.xml" value="0.2817028985507246" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/content_test.xml" value="0.34057971014492755" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/dish_group.xml" value="0.18009118541033434" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/dish_group_item.xml" value="0.33" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/dish_popup.xml" value="0.22" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/dish_popup_edit.xml" value="0.33" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/fragment_first.xml" value="0.2817028985507246" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/fragment_first2.xml" value="0.36666666666666664" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/fragment_second.xml" value="0.2817028985507246" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/fragment_second2.xml" value="0.36666666666666664" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/layout/list_item.xml" value="0.12454710144927536" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/menu/menu_adgc.xml" value="0.33" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/menu/popup_menu.xml" value="0.1" />
+        <entry key="..\:/8th Semester/Multimedia/project_v2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2735" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="15" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
