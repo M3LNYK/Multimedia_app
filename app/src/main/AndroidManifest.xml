@@ -11,14 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PdfMenu">
-        <!-- <activity -->
-        <!-- android:name=".add_item_Activity" -->
-        <!-- android:exported="true"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
         <activity
             android:name=".ADGC_Activity"
             android:exported="true"
@@ -28,14 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--        <activity-->
-        <!--            android:name=".CreateMenuActivity"-->
-        <!--            android:exported="false"-->
-        <!--            android:parentActivityName=".TemplateMenuActivity">-->
-        <!--            <meta-data-->
-        <!--                android:name="android.support.PARENT_ACTIVITY"-->
-        <!--                android:value=".TemplateMenuActivity" />-->
-        <!--        </activity>-->
+        <activity
+            android:name=".TemplateMenuActivity"
+            android:exported="false"
+            android:parentActivityName=".ADGC_Activity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TemplateMenuActivity" />
+        </activity>
     </application>
 
 </manifest>

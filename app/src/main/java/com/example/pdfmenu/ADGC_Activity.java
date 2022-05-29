@@ -1,6 +1,7 @@
 package com.example.pdfmenu;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -108,6 +109,7 @@ public class ADGC_Activity extends AppCompatActivity {
         getCheckedFilterChips();
     }
 
+    //Alert dialog to proceed
     private void materialDialogOpen(View view) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle("Continue to menus?")
@@ -116,6 +118,8 @@ public class ADGC_Activity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 //                        proceed to next activity
+                        Intent intent = new Intent(ADGC_Activity.this, TemplateMenuActivity.class);
+                        ADGC_Activity.this.startActivity(intent);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
