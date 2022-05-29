@@ -1,6 +1,7 @@
 package com.example.pdfmenu.dataBase.Dish;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Dish {
     public static ArrayList<Dish> dishArrayList = new ArrayList<>();
@@ -11,6 +12,7 @@ public class Dish {
     private String name;
     private String note;
     private String price;
+    private Date deleted;
 
     public Dish(int id, String group, String name, String note, String price) {
         this.id = id;
@@ -18,6 +20,7 @@ public class Dish {
         this.name = name;
         this.note = note;
         this.price = price;
+        deleted = null;
     }
 
     public Dish(int id, String name, String note, String price) {
@@ -26,6 +29,16 @@ public class Dish {
         this.group = null;
         this.price = price;
         this.note = note;
+        deleted = null;
+    }
+
+    public Dish(int id, String group, String name, String note, String price, Date deleted) {
+        this.id = id;
+        this.group = group;
+        this.name = name;
+        this.note = note;
+        this.price = price;
+        this.deleted = deleted;
     }
 
     public static Dish getDishForID(int passedDishID){
@@ -75,5 +88,23 @@ public class Dish {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public Date getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Date deleted) {
+        this.deleted = deleted;
+    }
+
+    public static ArrayList<Dish>nonDeletedDishes(){
+        ArrayList<Dish> nonDeleted = new ArrayList<>();
+        for(Dish dish : dishArrayList){
+            if (dish.getDeleted() == null)
+                nonDeleted.add(dish);
+        }
+
+        return nonDeleted;
     }
 }

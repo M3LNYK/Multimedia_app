@@ -20,7 +20,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "DishDB";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String TABLE_NAME = "Dish";
     private static final String COUNTER = "Counter";
 
@@ -29,6 +29,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
     private static final String NOTE_FIELD = "note";
     private static final String PRICE_FIELD = "price";
     private static final String GROUP_FIELD = "groupp";
+    private static final String DELETED_FIELD = "deleted";
 
     @SuppressLint("SimpleDateFormat")
     private static final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
@@ -64,6 +65,8 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 .append(PRICE_FIELD)
                 .append(" TEXT, ")
                 .append(NOTE_FIELD)
+                .append(" TEXT, ")
+                .append(DELETED_FIELD)
                 .append(" TEXT)");
 
         db.execSQL(sql.toString());
@@ -83,6 +86,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         contentValues.put(GROUP_FIELD, dish.getGroup());
         contentValues.put(PRICE_FIELD, dish.getPrice());
         contentValues.put(NOTE_FIELD, dish.getNote());
+        contentValues.put(DELETED_FIELD, getStringFromDate(dish.getDeleted()));
 
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
 
@@ -99,8 +103,10 @@ public class SQLiteManager extends SQLiteOpenHelper {
                     String group = result.getString(3);
                     String price = result.getString(4);
                     String note = result.getString(5);
+                    String deleteDate = result.getString(6);
+                    Date deleted = getDateFromString(deleteDate);
 
-                    Dish dish = new Dish(id, group, name, note, price);
+                    Dish dish = new Dish(id, group, name, note, price, deleted);
                     Dish.dishArrayList.add(dish);
                 }
             }
@@ -116,7 +122,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         contentValues.put(GROUP_FIELD, dish.getGroup());
         contentValues.put(PRICE_FIELD, dish.getPrice());
         contentValues.put(NOTE_FIELD, dish.getNote());
-
+        contentValues.put(DELETED_FIELD, getStringFromDate(dish.getDeleted()));
 
         sqLiteDatabase.update(TABLE_NAME, contentValues, ID_FIELD + " =? ", new String[]{String.valueOf(dish.getId())});
     }

@@ -24,6 +24,8 @@ import com.example.pdfmenu.dataBase.Dish.Dish;
 import com.example.pdfmenu.dataBase.Dish.DishListAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
+
 public class ADGC_Activity extends AppCompatActivity {
 
     ListView mListView;
@@ -50,12 +52,13 @@ public class ADGC_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adgc);
 
+//        getApplicationContext().deleteDatabase("DishDB");
+
         mListView = (ListView) findViewById(R.id.menu_items);
 
 
         loadFromDbToMemory();
-        DishListAdapter adapter = new DishListAdapter(getApplicationContext(), R.layout.adapter_view_layout, Dish.dishArrayList);
-        mListView.setAdapter(adapter);
+        setDishAdapter();
 
         fabOpen = (FloatingActionButton) findViewById(R.id.floating_open);
 
@@ -174,6 +177,17 @@ public class ADGC_Activity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        setDishAdapter();
+    }
+
+    private void setDishAdapter() {
+        DishListAdapter adapter = new DishListAdapter(getApplicationContext(), R.layout.adapter_view_layout, Dish.nonDeletedDishes());
+        mListView.setAdapter(adapter);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -259,26 +273,31 @@ public class ADGC_Activity extends AppCompatActivity {
             Dish newDish = new Dish(id, group, name, note, price);
             Dish.dishArrayList.add(newDish);
             sqLiteManager.addDishToDatabase(newDish);
-            if (mDialog != null) {
-                mDialog.hide();
-            }
-            if (mDialogEdit != null) {
-                mDialogEdit.hide();
-            }
         } else {
             selectedDish.setGroup(group);
             selectedDish.setName(name);
             selectedDish.setNote(note);
             selectedDish.setPrice(price);
             sqLiteManager.updateDishInDB(selectedDish);
-            if (mDialog != null) {
-                mDialog.hide();
-            }
-            if (mDialogEdit != null) {
-                mDialogEdit.hide();
-            }
         }
+        setDishAdapter();
+        finish();
+    }
 
+    public void finish(){
+        if (mDialog != null) {
+            mDialog.hide();
+        }
+        if (mDialogEdit != null) {
+            mDialogEdit.hide();
+        }
+    }
 
+    public void deleteDish(View view) {
+        selectedDish.setDeleted(new Date());
+        SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
+        sqLiteManager.updateDishInDB(selectedDish);
+        setDishAdapter();
+        finish();
     }
 }

@@ -118,7 +118,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="48dp"
         android:layout_marginTop="24dp"
-        android:onClick="saveDish"
+        android:onClick="deleteDish"
         android:text="Delete"
         android:backgroundTint="@color/button_red"
         app:layout_constraintEnd_toEndOf="parent"
