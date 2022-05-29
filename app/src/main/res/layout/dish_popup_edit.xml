@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Add dish"
+        android:text="Change dish"
         android:textAppearance="?attr/textAppearanceHeadline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
         tools:layout_editor_absoluteX="16dp">
 
         <AutoCompleteTextView
-            android:id="@+id/dish_group_autocomplete"
+            android:id="@+id/dish_edit_group_autocomplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/outlinedTextField_dish_group">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/popup_dishName"
+            android:id="@+id/popup_edit_dishName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/outlinedTextField_dish_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/popup_dishPrice"
+            android:id="@+id/popup_edit_dishPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/outlinedTextField_dish_price">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/popup_dishNote"
+            android:id="@+id/popup_edit_dishNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

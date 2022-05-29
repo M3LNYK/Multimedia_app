@@ -28,11 +28,15 @@ public class ADGC_Activity extends AppCompatActivity {
 
     ListView mListView;
     private EditText newDishPopup_name, newDishPopup_price, newDishPopup_note;
+    private EditText editDishPopup_name, editDishPopup_price, editDishPopup_note;
     private Button newDishPopup_save;
+    private AutoCompleteTextView newDishPopup_group;
+
 
     private ListView dishListView;
     private AlertDialog mDialog;
     private AlertDialog mDialogEdit;
+    private Dish selectedDish;
 
     private boolean clicked = false;
 
@@ -165,7 +169,7 @@ public class ADGC_Activity extends AppCompatActivity {
                 //editDishIntent.putExtra(Dish.DISH_EDIT_EXTRA, selectedDish.getId());
                 //startActivity(editDishIntent);
 
-                createEditDishDialog();
+                createEditDishDialog(selectedDish.getId());
             }
         });
     }
@@ -181,11 +185,6 @@ public class ADGC_Activity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
-//        if ( id == R.id.item_add_dish) {
-//            Toast.makeText(getApplicationContext(), "Add dish", Toast.LENGTH_LONG).show();
-//            createNewDishDialog();
-//        }
         if (id == R.id.item_delete_dish) {
             Toast.makeText(getApplicationContext(), "Delete dish selected", Toast.LENGTH_LONG).show();
         }
@@ -204,12 +203,12 @@ public class ADGC_Activity extends AppCompatActivity {
         mDialog.show();
 
 //        TextInputLayout textInputLayout = (TextInputLayout) mDialog.findViewById(R.id.outlinedTextField_dish_group);
-        AutoCompleteTextView chooseGroup = (AutoCompleteTextView) mDialog.findViewById(R.id.dish_group_autocomplete);
+        newDishPopup_group = (AutoCompleteTextView) mDialog.findViewById(R.id.dish_group_autocomplete);
         String[] dishGroups = getResources().getStringArray(R.array.dishTypes);
 
         ArrayAdapter<String> adapterr = new ArrayAdapter<>(this,
                 R.layout.dish_group_item, dishGroups);
-        chooseGroup.setAdapter(adapterr);
+        newDishPopup_group.setAdapter(adapterr);
 
         newDishPopup_name = mDialog.findViewById(R.id.popup_dishName);
         newDishPopup_note = mDialog.findViewById(R.id.popup_dishNote);
@@ -217,12 +216,33 @@ public class ADGC_Activity extends AppCompatActivity {
 
     }
 
-    public void createEditDishDialog() {
+    public void createEditDishDialog(int dishID) {
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
         final View dishPopupView = getLayoutInflater().inflate(R.layout.dish_popup_edit, null);
         mDialogBuilder.setView(dishPopupView);
         mDialogEdit = mDialogBuilder.create();
         mDialogEdit.show();
+
+        newDishPopup_group = (AutoCompleteTextView) mDialogEdit.findViewById(R.id.dish_edit_group_autocomplete);
+        String[] dishGroups = getResources().getStringArray(R.array.dishTypes);
+
+        ArrayAdapter<String> adapterr = new ArrayAdapter<>(this,
+                R.layout.dish_group_item, dishGroups);
+        newDishPopup_group.setAdapter(adapterr);
+
+        newDishPopup_name = mDialogEdit.findViewById(R.id.popup_edit_dishName);
+        newDishPopup_note = mDialogEdit.findViewById(R.id.popup_edit_dishNote);
+        newDishPopup_price = mDialogEdit.findViewById(R.id.popup_edit_dishPrice);
+
+        selectedDish = Dish.getDishForID(dishID);
+
+        if (selectedDish != null) {
+            newDishPopup_name.setText(selectedDish.getName());
+            newDishPopup_note.setText(selectedDish.getNote());
+            newDishPopup_price.setText(selectedDish.getPrice());
+            newDishPopup_group.setAdapter(adapterr);
+            newDishPopup_group.setText(selectedDish.getGroup());
+        }
     }
 
     public void saveDish(View view) {
@@ -231,13 +251,34 @@ public class ADGC_Activity extends AppCompatActivity {
         String name = String.valueOf(newDishPopup_name.getText());
         String note = String.valueOf(newDishPopup_note.getText());
         String price = String.valueOf(newDishPopup_price.getText());
+        String group = String.valueOf(newDishPopup_group.getText());
+
+        if (selectedDish == null) {
+            int id = Dish.dishArrayList.size();
+
+            Dish newDish = new Dish(id, group, name, note, price);
+            Dish.dishArrayList.add(newDish);
+            sqLiteManager.addDishToDatabase(newDish);
+            if (mDialog != null) {
+                mDialog.hide();
+            }
+            if (mDialogEdit != null) {
+                mDialogEdit.hide();
+            }
+        } else {
+            selectedDish.setGroup(group);
+            selectedDish.setName(name);
+            selectedDish.setNote(note);
+            selectedDish.setPrice(price);
+            sqLiteManager.updateDishInDB(selectedDish);
+            if (mDialog != null) {
+                mDialog.hide();
+            }
+            if (mDialogEdit != null) {
+                mDialogEdit.hide();
+            }
+        }
 
 
-        int id = Dish.dishArrayList.size();
-
-        Dish newDish = new Dish(id, name, note, price);
-        Dish.dishArrayList.add(newDish);
-        sqLiteManager.addDishToDatabase(newDish);
-        mDialog.hide();
     }
 }
