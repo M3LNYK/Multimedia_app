@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -21,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pdfmenu.dataBase.Dish.Dish;
 import com.example.pdfmenu.dataBase.Dish.DishListAdapter;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -46,6 +49,11 @@ public class ADGC_Activity extends AppCompatActivity {
     FloatingActionButton fabOpen;
     FloatingActionButton fabEdit;
     FloatingActionButton fabContinue;
+
+    private Chip chipSelectAll, chipSelectDrinks, chipSelectApperizers, chipSelectMain, chipSelectSpecials;
+    private ChipGroup chipFilterGroup;
+    private ArrayList<String> filterChips = new ArrayList<>();
+    private String filterStatus = "All";
 
 
     @Override
@@ -93,6 +101,55 @@ public class ADGC_Activity extends AppCompatActivity {
 //        For item in List
         setOnClickListener();
         initSearchWidgets();
+        initChips();
+        getCheckedFilterChips();
+    }
+
+    private void filterList(String status){
+        ArrayList<Dish> filteredDish = new ArrayList<>();
+        if (status.contains("All")){
+            setDishAdapter();
+        } else {
+            for (Dish dish : Dish.nonDeletedDishes()) {
+                if (dish.getGroup().contains(status)) {
+                    filteredDish.add(dish);
+                }
+            }
+            DishListAdapter adapter = new DishListAdapter(getApplicationContext(), R.layout.adapter_view_layout, filteredDish);
+            mListView.setAdapter(adapter);
+        }
+    }
+
+    private void getCheckedFilterChips() {
+        for (int i = 0; i < chipFilterGroup.getChildCount(); i++){
+            Chip chip = (Chip) chipFilterGroup.getChildAt(i);
+
+            chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    if (isChecked) {
+//                        filterChips.add(compoundButton.getText().toString());
+                        filterStatus = compoundButton.getText().toString();
+                    } else {
+//                        filterChips.remove(compoundButton.getText().toString());
+                    }
+
+                    if (!filterChips.isEmpty()) {
+                        Toast.makeText(getBaseContext(), filterChips.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                    filterList(filterStatus);
+                }
+            });
+        }
+    }
+
+    private void initChips() {
+        chipFilterGroup = findViewById(R.id.chip_filter_group);
+        chipSelectAll = findViewById(R.id.chip_select_all);
+        chipSelectDrinks = findViewById(R.id.chip_select_drinks);
+        chipSelectApperizers = findViewById(R.id.chip_select_appetizers);
+        chipSelectMain = findViewById(R.id.chip_select_main);
+        chipSelectSpecials = findViewById(R.id.chip_select_specials);
     }
 
     private void anAddButtonClicked() {

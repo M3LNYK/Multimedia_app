@@ -21,9 +21,11 @@
         android:layout_marginTop="45dp">
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_filter_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:singleLine="true">
+            app:singleLine="true"
+            app:singleSelection="true">
 
             <!-- Chips can be declared here, or added dynamically. -->
 
@@ -31,31 +33,42 @@
                 android:id="@+id/chip_select_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/All"/>
+                android:text="@string/All"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:checked="true"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_drinks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Drinks"/>
+                android:text="@string/Drinks"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:checked="false"/>
+
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_appetizers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Appetizers"/>
+                android:text="@string/Appetizers"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:checked="false"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Main_Dish"/>
+                android:text="@string/Main_Dish"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:checked="false"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_specials"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Season_specials"/>
+                android:text="@string/Season_specials"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:checked="false"/>
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
