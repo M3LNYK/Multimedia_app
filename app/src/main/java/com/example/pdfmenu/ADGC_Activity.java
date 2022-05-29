@@ -54,7 +54,7 @@ public class ADGC_Activity extends AppCompatActivity {
     private ChipGroup chipFilterGroup;
     private ArrayList<String> filterChips = new ArrayList<>();
     private String filterStatus = "All";
-
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +110,8 @@ public class ADGC_Activity extends AppCompatActivity {
         ArrayList<Dish> filteredDish = new ArrayList<>();
         if (status.contains("All")) {
             setDishAdapter();
+            searchView.setQuery("", false);
+            searchView.clearFocus();
         } else {
             for (Dish dish : Dish.nonDeletedDishes()) {
                 if (dish.getGroup().contains(status)) {
@@ -200,7 +202,7 @@ public class ADGC_Activity extends AppCompatActivity {
 
     //For Search bar
     private void initSearchWidgets() {
-        SearchView searchView = (SearchView) findViewById(R.id.menu_search);
+        searchView = (SearchView) findViewById(R.id.menu_search);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
