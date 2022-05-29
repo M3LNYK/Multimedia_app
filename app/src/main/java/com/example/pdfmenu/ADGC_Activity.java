@@ -105,6 +105,7 @@ public class ADGC_Activity extends AppCompatActivity {
         getCheckedFilterChips();
     }
 
+    //For chips under searchbar
     private void filterList(String status){
         ArrayList<Dish> filteredDish = new ArrayList<>();
         if (status.contains("All")){
@@ -120,6 +121,7 @@ public class ADGC_Activity extends AppCompatActivity {
         }
     }
 
+    //For chips under searchbar
     private void getCheckedFilterChips() {
         for (int i = 0; i < chipFilterGroup.getChildCount(); i++){
             Chip chip = (Chip) chipFilterGroup.getChildAt(i);
@@ -128,21 +130,16 @@ public class ADGC_Activity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     if (isChecked) {
-//                        filterChips.add(compoundButton.getText().toString());
                         filterStatus = compoundButton.getText().toString();
-                    } else {
-//                        filterChips.remove(compoundButton.getText().toString());
                     }
 
-                    if (!filterChips.isEmpty()) {
-                        Toast.makeText(getBaseContext(), filterChips.toString(), Toast.LENGTH_SHORT).show();
-                    }
                     filterList(filterStatus);
                 }
             });
         }
     }
 
+    //For chips under searchbar
     private void initChips() {
         chipFilterGroup = findViewById(R.id.chip_filter_group);
         chipSelectAll = findViewById(R.id.chip_select_all);
@@ -152,6 +149,7 @@ public class ADGC_Activity extends AppCompatActivity {
         chipSelectSpecials = findViewById(R.id.chip_select_specials);
     }
 
+    //For floating button
     private void anAddButtonClicked() {
         setVisibility(clicked);
         setAnimation(clicked);
@@ -160,6 +158,7 @@ public class ADGC_Activity extends AppCompatActivity {
 
     }
 
+    //For floating buttons
     private void setAnimation(Boolean click) {
         Animation rotateOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_open_anim);
         Animation rotateClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_close_anim);
@@ -176,6 +175,7 @@ public class ADGC_Activity extends AppCompatActivity {
         }
     }
 
+    //For floating buttons
     private void setVisibility(Boolean click) {
         if (!click) {
             fabEdit.setVisibility(View.VISIBLE);
@@ -186,6 +186,7 @@ public class ADGC_Activity extends AppCompatActivity {
         }
     }
 
+    //For floating buttons
     private void setClickable(Boolean click) {
         if (!click) {
             fabEdit.setClickable(true);
@@ -196,6 +197,8 @@ public class ADGC_Activity extends AppCompatActivity {
         }
     }
 
+
+    //For Search bar
     private void initSearchWidgets() {
         SearchView searchView = (SearchView) findViewById(R.id.menu_search);
 
@@ -224,6 +227,8 @@ public class ADGC_Activity extends AppCompatActivity {
         });
     }
 
+
+    //For DB
     private void loadFromDbToMemory() {
 
         SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
@@ -231,6 +236,7 @@ public class ADGC_Activity extends AppCompatActivity {
     }
 
 
+    //For item in list
     private void setOnClickListener() {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -252,19 +258,22 @@ public class ADGC_Activity extends AppCompatActivity {
         setDishAdapter();
     }
 
+
+    //For db
     private void setDishAdapter() {
         DishListAdapter adapter = new DishListAdapter(getApplicationContext(), R.layout.adapter_view_layout, Dish.nonDeletedDishes());
         mListView.setAdapter(adapter);
     }
 
 
+    //For options menu on adgc screen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_adgc, menu);
         return true;
     }
 
-
+    //For options menu on adgc screen
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -278,6 +287,7 @@ public class ADGC_Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //For add new dish popup
     public void createNewDishDialog() {
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
         final View dishPopupView = getLayoutInflater().inflate(R.layout.dish_popup, null);
@@ -285,7 +295,6 @@ public class ADGC_Activity extends AppCompatActivity {
         mDialog = mDialogBuilder.create();
         mDialog.show();
 
-//        TextInputLayout textInputLayout = (TextInputLayout) mDialog.findViewById(R.id.outlinedTextField_dish_group);
         newDishPopup_group = (AutoCompleteTextView) mDialog.findViewById(R.id.dish_group_autocomplete);
         String[] dishGroups = getResources().getStringArray(R.array.dishTypes);
 
@@ -299,6 +308,8 @@ public class ADGC_Activity extends AppCompatActivity {
 
     }
 
+
+    //For edit dish popup
     public void createEditDishDialog(int dishID) {
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
         final View dishPopupView = getLayoutInflater().inflate(R.layout.dish_popup_edit, null);
@@ -328,6 +339,7 @@ public class ADGC_Activity extends AppCompatActivity {
         }
     }
 
+    //Button to save dish in popups
     public void saveDish(View view) {
 
         SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
@@ -353,6 +365,8 @@ public class ADGC_Activity extends AppCompatActivity {
         close_popup();
     }
 
+
+    //For popups
     public void close_popup(){
         if (mDialog != null) {
             mDialog.hide();
@@ -362,6 +376,8 @@ public class ADGC_Activity extends AppCompatActivity {
         }
     }
 
+
+    //Button to delete dish in popup
     public void deleteDish(View view) {
         selectedDish.setDeleted(new Date());
         SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
