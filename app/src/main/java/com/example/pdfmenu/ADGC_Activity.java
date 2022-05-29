@@ -1,5 +1,6 @@
 package com.example.pdfmenu;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ import com.example.pdfmenu.dataBase.Dish.Dish;
 import com.example.pdfmenu.dataBase.Dish.DishListAdapter;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -94,7 +96,8 @@ public class ADGC_Activity extends AppCompatActivity {
         fabContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Go to menus", Toast.LENGTH_LONG).show();
+                materialDialogOpen(view);
+
             }
         });
 
@@ -103,6 +106,25 @@ public class ADGC_Activity extends AppCompatActivity {
         initSearchWidgets();
         initChips();
         getCheckedFilterChips();
+    }
+
+    private void materialDialogOpen(View view) {
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+        builder.setTitle("Continue to menus?")
+                .setMessage(R.string.message_text)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        proceed to next activity
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        builder.show();
     }
 
     //For chips under searchbar

@@ -25,4 +25,5 @@
     <string name="Main_Dish">Main Dish</string>
     <string name="Season_specials">Season specials</string>
     <string name="All">All</string>
+    <string name="message_text">Do you want to proceed to choose menu templates?</string>
 </resources>
