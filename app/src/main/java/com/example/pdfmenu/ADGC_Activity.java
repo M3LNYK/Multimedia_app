@@ -32,6 +32,7 @@ public class ADGC_Activity extends AppCompatActivity {
 
     private ListView dishListView;
     private AlertDialog mDialog;
+    private AlertDialog mDialogEdit;
 
     private boolean clicked = false;
 
@@ -59,7 +60,6 @@ public class ADGC_Activity extends AppCompatActivity {
         fabContinue = (FloatingActionButton) findViewById(R.id.floating_continue);
 
 
-
         fabOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +82,8 @@ public class ADGC_Activity extends AppCompatActivity {
             }
         });
 
-//        setOnClickListener();
+//        For item in List
+        setOnClickListener();
 
         initSearchWidgets();
     }
@@ -98,8 +99,8 @@ public class ADGC_Activity extends AppCompatActivity {
     private void setAnimation(Boolean click) {
         Animation rotateOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_open_anim);
         Animation rotateClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_close_anim);
-        Animation fromBottom =  AnimationUtils.loadAnimation(getApplicationContext(), R.anim.from_bottom_anim);
-        Animation toBottom =  AnimationUtils.loadAnimation(getApplicationContext(), R.anim.to_bottom_anim);
+        Animation fromBottom = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.from_bottom_anim);
+        Animation toBottom = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.to_bottom_anim);
         if (!click) {
             fabEdit.startAnimation(fromBottom);
             fabContinue.startAnimation(fromBottom);
@@ -112,7 +113,7 @@ public class ADGC_Activity extends AppCompatActivity {
     }
 
     private void setVisibility(Boolean click) {
-        if (!click){
+        if (!click) {
             fabEdit.setVisibility(View.VISIBLE);
             fabContinue.setVisibility(View.VISIBLE);
         } else {
@@ -121,8 +122,8 @@ public class ADGC_Activity extends AppCompatActivity {
         }
     }
 
-    private void setClickable(Boolean click){
-        if (!click){
+    private void setClickable(Boolean click) {
+        if (!click) {
             fabEdit.setClickable(true);
             fabContinue.setClickable(true);
         } else {
@@ -131,7 +132,7 @@ public class ADGC_Activity extends AppCompatActivity {
         }
     }
 
-    private void initSearchWidgets(){
+    private void initSearchWidgets() {
         SearchView searchView = (SearchView) findViewById(R.id.menu_search);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -153,29 +154,22 @@ public class ADGC_Activity extends AppCompatActivity {
         sqLiteManager.populateDishListArray();
     }
 
-    
 
-//    private void setOnClickListener(){
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                Dish selectedDish = (Dish) mListView.getItemAtPosition(position);
-//                Intent editDishIntent = new Intent(getApplicationContext(), DishDetailActivity.class);
-//                editDishIntent.putExtra(Dish.DISH_EDIT_EXTRA, selectedDish.getId());
-//                startActivity(editDishIntent);
-//            }
-//        });
-//    }
+    private void setOnClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Dish selectedDish = (Dish) mListView.getItemAtPosition(position);
+                //The code below will create new activity, I however want to create popup
+                //Intent editDishIntent = new Intent(getApplicationContext(), DishDetailActivity.class);
+                //editDishIntent.putExtra(Dish.DISH_EDIT_EXTRA, selectedDish.getId());
+                //startActivity(editDishIntent);
 
-//    @TODO create where it will redirect how to create new dish
-//    public void newDish( View view){
-//        Intent newDishIntent = new Intent(this, )
-//        startActivity(newDishIntent);
-//    }
+                createEditDishDialog();
+            }
+        });
+    }
 
-//    private void initWidgets() {
-//        dishListView = findViewById(R.id.menu_items);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -223,14 +217,22 @@ public class ADGC_Activity extends AppCompatActivity {
 
     }
 
-    public void saveDish(View view){
+    public void createEditDishDialog() {
+        AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
+        final View dishPopupView = getLayoutInflater().inflate(R.layout.dish_popup_edit, null);
+        mDialogBuilder.setView(dishPopupView);
+        mDialogEdit = mDialogBuilder.create();
+        mDialogEdit.show();
+    }
+
+    public void saveDish(View view) {
 
         SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
         String name = String.valueOf(newDishPopup_name.getText());
         String note = String.valueOf(newDishPopup_note.getText());
         String price = String.valueOf(newDishPopup_price.getText());
 
-        
+
         int id = Dish.dishArrayList.size();
 
         Dish newDish = new Dish(id, name, note, price);
@@ -238,5 +240,4 @@ public class ADGC_Activity extends AppCompatActivity {
         sqLiteManager.addDishToDatabase(newDish);
         mDialog.hide();
     }
-
 }
