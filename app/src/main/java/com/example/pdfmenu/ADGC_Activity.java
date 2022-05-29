@@ -106,9 +106,9 @@ public class ADGC_Activity extends AppCompatActivity {
     }
 
     //For chips under searchbar
-    private void filterList(String status){
+    private void filterList(String status) {
         ArrayList<Dish> filteredDish = new ArrayList<>();
-        if (status.contains("All")){
+        if (status.contains("All")) {
             setDishAdapter();
         } else {
             for (Dish dish : Dish.nonDeletedDishes()) {
@@ -123,7 +123,7 @@ public class ADGC_Activity extends AppCompatActivity {
 
     //For chips under searchbar
     private void getCheckedFilterChips() {
-        for (int i = 0; i < chipFilterGroup.getChildCount(); i++){
+        for (int i = 0; i < chipFilterGroup.getChildCount(); i++) {
             Chip chip = (Chip) chipFilterGroup.getChildAt(i);
 
             chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -212,10 +212,15 @@ public class ADGC_Activity extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
 
                 ArrayList<Dish> filteredDish = new ArrayList<Dish>();
-                for (Dish dish : Dish.nonDeletedDishes()){
-                    if(dish.getName().toLowerCase().contains(s.toLowerCase())){
-                        filteredDish.add(dish);
-
+                for (Dish dish : Dish.nonDeletedDishes()) {
+                    if (filterStatus.equals("All")) {
+                        if (dish.getName().toLowerCase().contains(s.toLowerCase())) {
+                            filteredDish.add(dish);
+                        }
+                    } else {
+                        if(dish.getGroup().contains(filterStatus) && dish.getName().contains(s.toLowerCase())){
+                            filteredDish.add(dish);
+                        }
                     }
                 }
 
@@ -253,7 +258,7 @@ public class ADGC_Activity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         setDishAdapter();
     }
@@ -367,7 +372,7 @@ public class ADGC_Activity extends AppCompatActivity {
 
 
     //For popups
-    public void close_popup(){
+    public void close_popup() {
         if (mDialog != null) {
             mDialog.hide();
         }
