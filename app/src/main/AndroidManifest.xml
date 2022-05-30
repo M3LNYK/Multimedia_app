@@ -28,6 +28,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".TemplateMenuActivity" />
         </activity>
+        <activity
+            android:name=".CreateMenuActivity"
+            android:exported="false"
+            android:parentActivityName=".TemplateMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CreateMenuActivity" />
+        </activity>
     </application>
 
 </manifest>

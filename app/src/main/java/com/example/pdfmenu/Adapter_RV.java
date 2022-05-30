@@ -1,6 +1,7 @@
 package com.example.pdfmenu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,14 @@ public class Adapter_RV extends RecyclerView.Adapter<Adapter_RV.ViewHolder> {
             super(itemView);
             title = itemView.findViewById(R.id.card_name_text_view);
             gridImage = itemView.findViewById(R.id.card_image);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), CreateMenuActivity.class);
+                    view.getContext().startActivity(intent);
+                }
+            });
 
         }
     }
