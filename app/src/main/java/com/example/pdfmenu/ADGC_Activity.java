@@ -31,6 +31,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class ADGC_Activity extends AppCompatActivity {
 
@@ -154,7 +155,6 @@ public class ADGC_Activity extends AppCompatActivity {
                     if (isChecked) {
                         filterStatus = compoundButton.getText().toString();
                     }
-
                     filterList(filterStatus);
                 }
             });
@@ -230,12 +230,12 @@ public class ADGC_Activity extends AppCompatActivity {
 
                 ArrayList<Dish> filteredDish = new ArrayList<>();
                 for (Dish dish : Dish.nonDeletedDishes()) {
-                    if (filterStatus.equals("All")) {
+                    if (filterStatus.toLowerCase().equals("All".toLowerCase())) {
                         if (dish.getName().toLowerCase().contains(s.toLowerCase())) {
                             filteredDish.add(dish);
                         }
                     } else {
-                        if(dish.getGroup().contains(filterStatus) && dish.getName().contains(s.toLowerCase())){
+                        if(dish.getGroup().toLowerCase().contains(filterStatus.toLowerCase()) && dish.getName().toLowerCase().contains(s.toLowerCase())){
                             filteredDish.add(dish);
                         }
                     }
@@ -422,9 +422,11 @@ public class ADGC_Activity extends AppCompatActivity {
     public void close_popup() {
         if (mDialog != null) {
             mDialog.hide();
+            searchView.clearFocus();
         }
         if (mDialogEdit != null) {
             mDialogEdit.hide();
+            searchView.clearFocus();
         }
     }
 
