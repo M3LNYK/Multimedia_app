@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -31,18 +30,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
 public class ADGC_Activity extends AppCompatActivity {
 
     ListView mListView;
     private EditText newDishPopup_name, newDishPopup_price, newDishPopup_note;
-    private EditText editDishPopup_name, editDishPopup_price, editDishPopup_note;
-    private Button newDishPopup_save;
     private AutoCompleteTextView newDishPopup_group;
 
 
-    private ListView dishListView;
     private AlertDialog mDialog;
     private AlertDialog mDialogEdit;
     private Dish selectedDish;
@@ -53,9 +48,7 @@ public class ADGC_Activity extends AppCompatActivity {
     FloatingActionButton fabEdit;
     FloatingActionButton fabContinue;
 
-    private Chip chipSelectAll, chipSelectDrinks, chipSelectApperizers, chipSelectMain, chipSelectSpecials;
     private ChipGroup chipFilterGroup;
-    private ArrayList<String> filterChips = new ArrayList<>();
     private String filterStatus = "All";
     private SearchView searchView;
 
@@ -66,17 +59,17 @@ public class ADGC_Activity extends AppCompatActivity {
 
 //        getApplicationContext().deleteDatabase("DishDB");
 
-        mListView = (ListView) findViewById(R.id.menu_items);
+        mListView = findViewById(R.id.menu_items);
 
 
         loadFromDbToMemory();
         setDishAdapter();
 
-        fabOpen = (FloatingActionButton) findViewById(R.id.floating_open);
+        fabOpen = findViewById(R.id.floating_open);
 
-        fabEdit = (FloatingActionButton) findViewById(R.id.floating_edit);
+        fabEdit = findViewById(R.id.floating_edit);
 
-        fabContinue = (FloatingActionButton) findViewById(R.id.floating_continue);
+        fabContinue = findViewById(R.id.floating_continue);
 
 
         fabOpen.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +90,7 @@ public class ADGC_Activity extends AppCompatActivity {
         fabContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                materialDialogOpen(view);
+                materialDialogOpen();
 
             }
         });
@@ -110,7 +103,7 @@ public class ADGC_Activity extends AppCompatActivity {
     }
 
     //Alert dialog to proceed
-    private void materialDialogOpen(View view) {
+    private void materialDialogOpen() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle("Continue to menus?")
                 .setMessage(R.string.message_text)
@@ -170,11 +163,6 @@ public class ADGC_Activity extends AppCompatActivity {
     //For chips under searchbar
     private void initChips() {
         chipFilterGroup = findViewById(R.id.chip_filter_group);
-        chipSelectAll = findViewById(R.id.chip_select_all);
-        chipSelectDrinks = findViewById(R.id.chip_select_drinks);
-        chipSelectApperizers = findViewById(R.id.chip_select_appetizers);
-        chipSelectMain = findViewById(R.id.chip_select_main);
-        chipSelectSpecials = findViewById(R.id.chip_select_specials);
     }
 
     //For floating button
@@ -228,7 +216,7 @@ public class ADGC_Activity extends AppCompatActivity {
 
     //For Search bar
     private void initSearchWidgets() {
-        searchView = (SearchView) findViewById(R.id.menu_search);
+        searchView = findViewById(R.id.menu_search);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -239,7 +227,7 @@ public class ADGC_Activity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String s) {
 
-                ArrayList<Dish> filteredDish = new ArrayList<Dish>();
+                ArrayList<Dish> filteredDish = new ArrayList<>();
                 for (Dish dish : Dish.nonDeletedDishes()) {
                     if (filterStatus.equals("All")) {
                         if (dish.getName().toLowerCase().contains(s.toLowerCase())) {
@@ -275,11 +263,6 @@ public class ADGC_Activity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Dish selectedDish = (Dish) mListView.getItemAtPosition(position);
-                //The code below will create new activity, I however want to create popup
-                //Intent editDishIntent = new Intent(getApplicationContext(), DishDetailActivity.class);
-                //editDishIntent.putExtra(Dish.DISH_EDIT_EXTRA, selectedDish.getId());
-                //startActivity(editDishIntent);
-
                 createEditDishDialog(selectedDish.getId());
             }
         });
@@ -311,7 +294,8 @@ public class ADGC_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.item_delete_dish) {
-            Toast.makeText(getApplicationContext(), "Delete dish selected", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), "Delete dish selected", Toast.LENGTH_LONG).show();
+            confirmDishDelete();
         }
         if (id == R.id.item_organize_dish) {
             Toast.makeText(getApplicationContext(), "Organize dish selected", Toast.LENGTH_LONG).show();
@@ -319,6 +303,38 @@ public class ADGC_Activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    //For options menu
+    private void deleteAllDish() {
+        for (Dish dish : Dish.nonDeletedDishes()){
+            dish.setDeleted(new Date());
+            SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
+            sqLiteManager.updateDishInDB(dish);
+        }
+        setDishAdapter();
+    }
+
+    //For options menu
+    private void confirmDishDelete() {
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+        builder.setTitle("Delete all?")
+                .setMessage(R.string.message_delete_text)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteAllDish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        builder.show();
+    }
+
 
     //For add new dish popup
     public void createNewDishDialog() {
@@ -328,7 +344,7 @@ public class ADGC_Activity extends AppCompatActivity {
         mDialog = mDialogBuilder.create();
         mDialog.show();
 
-        newDishPopup_group = (AutoCompleteTextView) mDialog.findViewById(R.id.dish_group_autocomplete);
+        newDishPopup_group = mDialog.findViewById(R.id.dish_group_autocomplete);
         String[] dishGroups = getResources().getStringArray(R.array.dishTypes);
 
         ArrayAdapter<String> adapterr = new ArrayAdapter<>(this,
@@ -350,7 +366,7 @@ public class ADGC_Activity extends AppCompatActivity {
         mDialogEdit = mDialogBuilder.create();
         mDialogEdit.show();
 
-        newDishPopup_group = (AutoCompleteTextView) mDialogEdit.findViewById(R.id.dish_edit_group_autocomplete);
+        newDishPopup_group = mDialogEdit.findViewById(R.id.dish_edit_group_autocomplete);
         String[] dishGroups = getResources().getStringArray(R.array.dishTypes);
 
         ArrayAdapter<String> adapterr = new ArrayAdapter<>(this,

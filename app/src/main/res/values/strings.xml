@@ -26,6 +26,7 @@
     <string name="Season_specials">Season specials</string>
     <string name="All">All</string>
     <string name="message_text">Do you want to proceed to choose menu templates?</string>
+    <string name="message_delete_text">Do you want to delete all dishes written in db?</string>
     <string name="menu_template_name">Menu template 1</string>
     <string name="menu_template_date">29/05/2022</string>
     <string name="menu_template_pages">1 page</string>
