@@ -27,6 +27,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -298,7 +299,9 @@ public class ADGC_Activity extends AppCompatActivity {
             confirmDishDelete();
         }
         if (id == R.id.item_organize_dish) {
-            Toast.makeText(getApplicationContext(), "Organize dish selected", Toast.LENGTH_LONG).show();
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(android.R.id.content), "Organize dishes", Snackbar.LENGTH_LONG);
+            snackbar.show();
         }
 
         return super.onOptionsItemSelected(item);
