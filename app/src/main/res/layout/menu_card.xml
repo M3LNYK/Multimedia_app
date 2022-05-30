@@ -14,11 +14,12 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/card_image"
             android:layout_width="match_parent"
             android:layout_height="194dp"
             android:contentDescription="Some description"
             android:scaleType="centerCrop"
-            android:srcCompat="@drawable/media" />
+            />
 
         <LinearLayout
 
@@ -29,6 +30,7 @@
 
             <!-- Title, secondary and supporting text -->
             <TextView
+                android:id="@+id/card_name_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/menu_template_name"
