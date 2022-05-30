@@ -38,8 +38,10 @@ public class DishListAdapter extends ArrayAdapter<Dish> {
         String name = getItem(position).getName();
         String note = getItem(position).getNote();
         String price = getItem(position).getPrice();
-
+        String group = getItem(position).getGroup();
+        String groupCharacter;
 //        Dish dish = new Dish(name, price, note);
+        groupCharacter = selectGroupCharacter(group);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
@@ -47,12 +49,29 @@ public class DishListAdapter extends ArrayAdapter<Dish> {
         TextView tvName = (TextView) convertView.findViewById(R.id.nameText);
         TextView tvNote = (TextView) convertView.findViewById(R.id.noteText);
         TextView tvPrice = (TextView) convertView.findViewById(R.id.priceText);
+        TextView tvGroup = (TextView) convertView.findViewById(R.id.groupText);
 
         tvName.setText(name);
         tvNote.setText(note);
         tvPrice.setText(price);
+        tvGroup.setText(groupCharacter);
 
 
         return convertView;
+    }
+
+    private String selectGroupCharacter(String group) {
+        switch (group) {
+            case "Drinks":
+                return "D";
+            case "Main Dish":
+                return "MD";
+            case "Appetizers":
+                return "A";
+            case "Season Specials":
+                return "Sp";
+            default:
+                return "";
+        }
     }
 }
