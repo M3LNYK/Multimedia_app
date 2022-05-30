@@ -1,5 +1,6 @@
 package com.example.pdfmenu.dataBase.Dish;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ public class DishListAdapter extends ArrayAdapter<Dish> {
         this.mResource = 0;
     }
 
+    @SuppressLint("ViewHolder")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -46,10 +48,10 @@ public class DishListAdapter extends ArrayAdapter<Dish> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        TextView tvName = (TextView) convertView.findViewById(R.id.nameText);
-        TextView tvNote = (TextView) convertView.findViewById(R.id.noteText);
-        TextView tvPrice = (TextView) convertView.findViewById(R.id.priceText);
-        TextView tvGroup = (TextView) convertView.findViewById(R.id.groupText);
+        TextView tvName = convertView.findViewById(R.id.nameText);
+        TextView tvNote = convertView.findViewById(R.id.noteText);
+        TextView tvPrice = convertView.findViewById(R.id.priceText);
+        TextView tvGroup = convertView.findViewById(R.id.groupText);
 
         tvName.setText(name);
         tvNote.setText(note);

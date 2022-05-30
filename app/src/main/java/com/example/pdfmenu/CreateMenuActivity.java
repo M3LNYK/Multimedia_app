@@ -17,6 +17,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.pdfmenu.dataBase.Dish.Dish;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,6 +30,8 @@ public class CreateMenuActivity extends AppCompatActivity {
     Button button_create;
 
     Bitmap bmp, scaledBitmap;
+
+    TextView tvAmountOfObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class CreateMenuActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
+        TextView tvGroup = findViewById(R.id.textViewNumberDish);
+        tvGroup.setText(amount());
+
         createPDF();
     }
 
@@ -47,38 +55,47 @@ public class CreateMenuActivity extends AppCompatActivity {
         button_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PdfDocument myPdfDocument = new PdfDocument();
-                Paint myPaint = new Paint();
-                Paint rectPaint = new Paint();
-                rectPaint.setColor(ResourcesCompat.getColor(getResources(), R.color.menu1_strip, null));
-
-                PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(1240, 1754, 1).create();
-                PdfDocument.Page myPage1 = myPdfDocument.startPage(myPageInfo1);
-
-                Canvas canvas = myPage1.getCanvas();
-
-                canvas.drawBitmap(scaledBitmap, 0, 0, myPaint);
-                canvas.drawRect(0, 585, 1240, 620, rectPaint);
-
-                rectPaint.setColor(ResourcesCompat.getColor(getResources(), R.color.menu1_background, null));
-                canvas.drawRect(0, 620, 1240, 1754, rectPaint);
-
-
-                myPdfDocument.finishPage(myPage1);
-
-                File file = new File(Environment.getExternalStorageDirectory(), "/Download/Menu.pdf");
-
-//                Create a more fancy way to check if folder exists and create a new if it doesn't
-                try {
-                    myPdfDocument.writeTo(new FileOutputStream(file));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                myPdfDocument.close();
+                creatPdfFileV1();
 
             }
         });
+    }
+
+    private void creatPdfFileV1() {
+        PdfDocument myPdfDocument = new PdfDocument();
+        Paint myPaint = new Paint();
+        Paint rectPaint = new Paint();
+        rectPaint.setColor(ResourcesCompat.getColor(getResources(), R.color.menu1_strip, null));
+
+        PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(1240, 1754, 1).create();
+        PdfDocument.Page myPage1 = myPdfDocument.startPage(myPageInfo1);
+
+        Canvas canvas = myPage1.getCanvas();
+
+        canvas.drawBitmap(scaledBitmap, 0, 0, myPaint);
+        canvas.drawRect(0, 585, 1240, 620, rectPaint);
+
+        rectPaint.setColor(ResourcesCompat.getColor(getResources(), R.color.menu1_background, null));
+        canvas.drawRect(0, 620, 1240, 1754, rectPaint);
+
+
+        myPdfDocument.finishPage(myPage1);
+
+        File file = new File(Environment.getExternalStorageDirectory(), "/Download/Menu.pdf");
+
+//                Create a more fancy way to check if folder exists and create a new if it doesn't
+        try {
+            myPdfDocument.writeTo(new FileOutputStream(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        myPdfDocument.close();
+    }
+
+    private String amount(){
+        String result = Integer.toString(Dish.nonDeletedDishes().size());
+        return result;
     }
 
 }
