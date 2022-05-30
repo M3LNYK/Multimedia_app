@@ -32,12 +32,19 @@ public class TemplateMenuActivity extends AppCompatActivity {
         titles.add("Simple menu");
         titles.add("Wood & red stripes");
         titles.add("Taxi yellow menu");
+        titles.add("Blue menu");
+        titles.add("Many options");
+        titles.add("Breakfast menu");
+        titles.add("Few options menu");
 
         images.add(R.drawable.menu_example_v1);
         images.add(R.drawable.menu_simple);
         images.add(R.drawable.menu_wood_red);
         images.add(R.drawable.menu_yellow);
-
+        images.add(R.drawable.menu_blue);
+        images.add(R.drawable.menu_black_white);
+        images.add(R.drawable.menu_breakfast);
+        images.add(R.drawable.menu_small_diner);
 
         adapter_rv = new Adapter_RV(this, titles, images);
 
