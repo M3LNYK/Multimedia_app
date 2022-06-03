@@ -28,13 +28,18 @@ import java.util.ArrayList;
 
 public class CreateMenuActivity extends AppCompatActivity {
 
-    Button button_create;
+    private Button button_create;
 
-    Bitmap bmp, scaledBitmap;
+    private Bitmap bmp, scaledBitmap;
 
-    TextView tvAmountOfObj;
+    private TextView tvAmountOfObj;
 
-    int pageWidth, pageHeight;
+    private int pageWidth, pageHeight;
+
+    private int md_counter = 0;
+    private int d_counter = 0;
+    private int a_counter = 0;
+    private int sp_counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,23 +71,24 @@ public class CreateMenuActivity extends AppCompatActivity {
 
     private ArrayList<String> groups = new ArrayList<>();
 
-    private void getGroups(){
+    private void getGroups() {
         if (Dish.nonDeletedDishes().size() > 0) {
             for (Dish dish : Dish.nonDeletedDishes()) {
-                if(!groups.contains(dish.getGroup())) {
+                if (!groups.contains(dish.getGroup())) {
                     groups.add(dish.getGroup());
                 }
             }
         }
     }
 
-    private void createPdfFileV2(){
+    private void createPdfFileV2() {
         if (Dish.nonDeletedDishes().size() > 0) {
 
             PdfDocument myPdfDocument = new PdfDocument();
             Paint myPaint = new Paint();
             Paint titlePaint = new Paint();
-            Paint groupName = new Paint();
+            Paint dishName = new Paint();
+
 
             pageWidth = 1240;
             pageHeight = 1754;
@@ -95,14 +101,14 @@ public class CreateMenuActivity extends AppCompatActivity {
             titlePaint.setTextAlign(Paint.Align.CENTER);
             titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             titlePaint.setTextSize(90);
-            canvas.drawText("MENU", pageWidth/2, 270, titlePaint);
+            canvas.drawText("MENU", pageWidth / 2, 270, titlePaint);
 
             getGroups();
-            groupName.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            groupName.setTextSize(30);
-            groupName.setTextAlign(Paint.Align.CENTER);
-            for (int i = 0; i < groups.size(); i++){
-                canvas.drawText(groups.get(i), pageWidth/groups.size()*i, 370, groupName);
+            dishName.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+            dishName.setTextSize(30);
+            dishName.setTextAlign(Paint.Align.LEFT);
+            for (int i = 0; i < groups.size(); i++) {
+                canvas.drawText(groups.get(i), pageWidth / 4, 370 * (i + 1), dishName);
             }
 
 
@@ -157,7 +163,7 @@ public class CreateMenuActivity extends AppCompatActivity {
         myPdfDocument.close();
     }
 
-    private String amountToStr(){
+    private String amountToStr() {
         String result = Integer.toString(Dish.nonDeletedDishes().size());
         return result;
     }
