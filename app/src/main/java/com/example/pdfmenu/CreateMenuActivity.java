@@ -100,15 +100,16 @@ public class CreateMenuActivity extends AppCompatActivity {
 
             titlePaint.setTextAlign(Paint.Align.CENTER);
             titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            titlePaint.setTextSize(90);
-            canvas.drawText("MENU", pageWidth / 2, 270, titlePaint);
+            titlePaint.setTextSize(100);
+            canvas.drawText("MENU", pageWidth / 2, 200, titlePaint);
+            canvas.drawLine(pageWidth/3, 250, pageWidth/3*2, 250, titlePaint);
 
             getGroups();
             dishName.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            dishName.setTextSize(30);
+            dishName.setTextSize(40);
             dishName.setTextAlign(Paint.Align.LEFT);
             for (int i = 0; i < groups.size(); i++) {
-                canvas.drawText(groups.get(i), pageWidth / 4, 370 * (i + 1), dishName);
+                canvas.drawText(groups.get(i), 140, 370 * (i + 1), dishName);
             }
 
 
