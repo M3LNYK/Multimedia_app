@@ -87,7 +87,9 @@ public class CreateMenuActivity extends AppCompatActivity {
             PdfDocument myPdfDocument = new PdfDocument();
             Paint myPaint = new Paint();
             Paint titlePaint = new Paint();
-            Paint dishName = new Paint();
+            Paint groupName = new Paint();
+            Paint dishData = new Paint();
+
 
 
             pageWidth = 1240;
@@ -100,16 +102,34 @@ public class CreateMenuActivity extends AppCompatActivity {
 
             titlePaint.setTextAlign(Paint.Align.CENTER);
             titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            titlePaint.setTextSize(100);
+            titlePaint.setTextSize(110);
             canvas.drawText("MENU", pageWidth / 2, 200, titlePaint);
             canvas.drawLine(pageWidth/3, 250, pageWidth/3*2, 250, titlePaint);
 
             getGroups();
-            dishName.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            dishName.setTextSize(40);
-            dishName.setTextAlign(Paint.Align.LEFT);
+            groupName.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+            groupName.setTextSize(50);
+            groupName.setTextAlign(Paint.Align.LEFT);
+
+            dishData.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+            dishData.setTextSize(35);
+            dishData.setTextAlign(Paint.Align.LEFT);
+
+            int counter = 370;
             for (int i = 0; i < groups.size(); i++) {
-                canvas.drawText(groups.get(i), 140, 370 * (i + 1), dishName);
+                canvas.drawText(groups.get(i), 140, counter , groupName);
+                ArrayList<Dish> tmp = getDishList(groups.get(i));
+                for (Dish dish : tmp){
+                    counter += 60;
+                    String changedName = dish.getName() + "   ";
+                    int s = changedName.length();
+                    for (int k = s; k <= 50; k++ ){
+                        changedName += "_";
+                    }
+                    canvas.drawText(changedName, 160, counter, dishData );
+                    canvas.drawText(dish.getPrice() + " $", 995, counter, dishData );
+                }
+                counter +=150;
             }
 
 
@@ -162,6 +182,16 @@ public class CreateMenuActivity extends AppCompatActivity {
         }
 
         myPdfDocument.close();
+    }
+
+    public ArrayList<Dish> getDishList(String groupName){
+        ArrayList<Dish> res = new ArrayList<>();
+        for (Dish dish : Dish.nonDeletedDishes()){
+            if (dish.getGroup().contains(groupName)){
+                res.add(dish);
+            }
+        }
+        return res;
     }
 
     private String amountToStr() {
