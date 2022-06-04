@@ -18,4 +18,5 @@
     <color name="menu1_background">#3e2527</color>
     <color name="menu1_name_background">#f6ebc2</color>
     <color name="menu1_strip">#efb14a</color>
+    <color name="text_description">#3a3636</color>
 </resources>

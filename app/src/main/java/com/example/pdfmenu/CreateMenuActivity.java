@@ -2,6 +2,7 @@ package com.example.pdfmenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.Manifest;
@@ -10,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
@@ -103,6 +105,9 @@ public class CreateMenuActivity extends AppCompatActivity {
 
             Canvas canvas = myPage1.getCanvas();
 
+            int color = ContextCompat.getColor(getApplicationContext(), R.color.button_red);
+            myPaint.setColor(color);
+//            canvas.drawRect(0, 0, pageWidth, pageHeight, myPaint);
             titlePaint.setTextAlign(Paint.Align.CENTER);
             titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             titlePaint.setTextSize(110);

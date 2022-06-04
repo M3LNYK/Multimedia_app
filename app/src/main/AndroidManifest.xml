@@ -13,10 +13,8 @@
         android:theme="@style/Theme.PdfMenu">
         <activity
             android:name=".PdfDisplayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityPdfRender"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".CreateMenuActivity"/>
         <activity
             android:name=".ADGC_Activity"
             android:exported="true"

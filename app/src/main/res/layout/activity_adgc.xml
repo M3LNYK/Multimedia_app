@@ -31,44 +31,44 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_all"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/All"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:checked="true"/>
+                android:checked="true"
+                android:text="@string/All" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_drinks"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Drinks"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:checked="false"/>
+                android:checked="false"
+                android:text="@string/Drinks" />
 
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_appetizers"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Appetizers"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:checked="false"/>
+                android:checked="false"
+                android:text="@string/Appetizers" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_main"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Main_Dish"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:checked="false"/>
+                android:checked="false"
+                android:text="@string/Main_Dish" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_select_specials"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Season_specials"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:checked="false"/>
+                android:checked="false"
+                android:text="@string/Season_specials" />
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
@@ -89,11 +89,58 @@
 
         <!-- Main content -->
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/text_card_view_continue"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="503dp"
+            android:visibility="invisible"
+            app:cardCornerRadius="6dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_fab_continue"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:background="@color/text_description"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="Continue"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/text_card_view_edit"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="563dp"
+            android:visibility="invisible"
+            app:cardCornerRadius="6dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_fab_edit"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:background="@color/text_description"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="Add dishes"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                />
+
+        </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_continue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="315dp"
+            android:layout_marginLeft="310dp"
             android:layout_marginTop="490dp"
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
@@ -102,27 +149,27 @@
             android:visibility="invisible"
             app:srcCompat="@drawable/ic_add_menu" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/floating_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="315dp"
+            android:layout_marginLeft="310dp"
             android:layout_marginTop="550dp"
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:focusable="true"
             android:visibility="invisible"
-            app:srcCompat="@drawable/ic_edit" />
+            app:icon="@drawable/ic_edit" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_open"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="315dp"
+            android:layout_marginLeft="310dp"
             android:layout_marginTop="620dp"
+            android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
-            android:contentDescription="Add dish"
             android:focusable="true"
             app:backgroundTint="@color/secondaryColor"
             app:srcCompat="@drawable/ic_add" />

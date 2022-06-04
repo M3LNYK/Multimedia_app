@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -23,11 +24,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pdfmenu.dataBase.Dish.Dish;
 import com.example.pdfmenu.dataBase.Dish.DishListAdapter;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,12 +51,14 @@ public class ADGC_Activity extends AppCompatActivity {
     private boolean clicked = false;
 
     FloatingActionButton fabOpen;
-    FloatingActionButton fabEdit;
+    ExtendedFloatingActionButton fabEdit;
     FloatingActionButton fabContinue;
 
     private ChipGroup chipFilterGroup;
     private String filterStatus = "All";
     private SearchView searchView;
+
+    private MaterialCardView editTextCardView, continueTextCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +78,10 @@ public class ADGC_Activity extends AppCompatActivity {
         fabEdit = findViewById(R.id.floating_edit);
 
         fabContinue = findViewById(R.id.floating_continue);
+
+        editTextCardView = findViewById(R.id.text_card_view_edit);
+
+        continueTextCardView = findViewById(R.id.text_card_view_continue);
 
 
         fabOpen.setOnClickListener(new View.OnClickListener() {
@@ -186,10 +196,14 @@ public class ADGC_Activity extends AppCompatActivity {
             fabEdit.startAnimation(fromBottom);
             fabContinue.startAnimation(fromBottom);
             fabOpen.startAnimation(rotateOpen);
+            editTextCardView.startAnimation(fromBottom);
+            continueTextCardView.startAnimation(fromBottom);
         } else {
             fabEdit.startAnimation(toBottom);
             fabContinue.startAnimation(toBottom);
             fabOpen.startAnimation(rotateClose);
+            editTextCardView.startAnimation(toBottom);
+            continueTextCardView.startAnimation(toBottom);
         }
     }
 
@@ -198,9 +212,13 @@ public class ADGC_Activity extends AppCompatActivity {
         if (!click) {
             fabEdit.setVisibility(View.VISIBLE);
             fabContinue.setVisibility(View.VISIBLE);
+            editTextCardView.setVisibility(View.VISIBLE);
+            continueTextCardView.setVisibility(View.VISIBLE);
         } else {
             fabEdit.setVisibility(View.INVISIBLE);
             fabContinue.setVisibility(View.INVISIBLE);
+            editTextCardView.setVisibility(View.INVISIBLE);
+            continueTextCardView.setVisibility(View.INVISIBLE);
         }
     }
 
