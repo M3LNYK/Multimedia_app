@@ -30,4 +30,5 @@
     <string name="menu_template_name">Menu template 1</string>
     <string name="menu_template_date">29/05/2022</string>
     <string name="menu_template_pages">1 page</string>
+    <string name="app_name_with_index">1</string>
 </resources>

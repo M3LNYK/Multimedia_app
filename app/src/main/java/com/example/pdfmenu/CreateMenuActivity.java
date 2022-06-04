@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -64,6 +65,8 @@ public class CreateMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createPdfFileV2();
+                Intent intent = new Intent(CreateMenuActivity.this, PdfDisplayActivity.class);
+                CreateMenuActivity.this.startActivity(intent);
 
             }
         });
