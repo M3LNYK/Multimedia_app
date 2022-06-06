@@ -123,8 +123,8 @@ public class ADGC_Activity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 //                        proceed to next activity
-//                        Intent intent = new Intent(ADGC_Activity.this, TemplateMenuActivity.class);
-                        Intent intent = new Intent(ADGC_Activity.this, CreateMenuActivity.class);
+                        Intent intent = new Intent(ADGC_Activity.this, TemplateMenuActivity.class);
+//                        Intent intent = new Intent(ADGC_Activity.this, CreateMenuActivity.class);
                         ADGC_Activity.this.startActivity(intent);
                     }
                 })

@@ -67,8 +67,6 @@ public class CreateMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createPdfFileV2();
-                Intent intent = new Intent(CreateMenuActivity.this, PdfDisplayActivity.class);
-                CreateMenuActivity.this.startActivity(intent);
 
             }
         });
@@ -153,6 +151,8 @@ public class CreateMenuActivity extends AppCompatActivity {
             }
 
             myPdfDocument.close();
+            Intent intent = new Intent(CreateMenuActivity.this, PdfDisplayActivity.class);
+            CreateMenuActivity.this.startActivity(intent);
         } else {
             Snackbar snackbar = Snackbar
                     .make(findViewById(android.R.id.content), "Can not create empty menu!", Snackbar.LENGTH_LONG);
