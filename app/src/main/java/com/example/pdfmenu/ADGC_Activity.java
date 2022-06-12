@@ -183,7 +183,6 @@ public class ADGC_Activity extends AppCompatActivity {
         setAnimation(clicked);
         setClickable(clicked);
         clicked = !clicked;
-
     }
 
     //For floating buttons
@@ -237,7 +236,6 @@ public class ADGC_Activity extends AppCompatActivity {
     //For Search bar
     private void initSearchWidgets() {
         searchView = findViewById(R.id.menu_search);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

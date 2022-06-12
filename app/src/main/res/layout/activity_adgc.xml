@@ -11,14 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
-        android:queryHint="@string/dish_search">
+        android:queryHint="@string/dish_search"
+        >
 
     </SearchView>
 
     <HorizontalScrollView
+        android:id="@+id/horizontal_chip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="45dp"
+        >
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_filter_group"
