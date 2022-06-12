@@ -31,4 +31,6 @@
     <string name="menu_template_date">29/05/2022</string>
     <string name="menu_template_pages">1 page</string>
     <string name="app_name_with_index">1</string>
+    <string name="add_dishes">Add dishes</string>
+    <string name="continue_to_menu_template">Continue</string>
 </resources>
