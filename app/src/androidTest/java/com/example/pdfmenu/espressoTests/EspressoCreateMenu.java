@@ -17,7 +17,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.example.pdfmenu.ADGC_Activity;
 import com.example.pdfmenu.CreateMenuActivity;
 import com.example.pdfmenu.R;
 
@@ -29,7 +28,24 @@ public class EspressoCreateMenu {
     public ActivityScenarioRule<CreateMenuActivity> activityScenarioRule = new ActivityScenarioRule<CreateMenuActivity>(CreateMenuActivity.class);
 
     @Test
-    public void textView_isDisplayed() {
+    public void textViewHeader_isDisplayed() {
         onView(withId(R.id.textView2)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void textView3_isDisplayedLeft(){
+        onView(withId(R.id.textView3)).check(isCompletelyLeftOf(withId(R.id.textViewNumberDish)));
+    }
+
+    @Test
+    public void textViewNumber_isDisplayedRight(){
+        onView(withId(R.id.textViewNumberDish)).check(isCompletelyRightOf(withId(R.id.textView3)));
+    }
+
+    @Test
+    public void buttonCreate_isDisplayed() {
+        onView(withId(R.id.button_createPDF)).check(matches(isDisplayed()));
+    }
+
+
 }
