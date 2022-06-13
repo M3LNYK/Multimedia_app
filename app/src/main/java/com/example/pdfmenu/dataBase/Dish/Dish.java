@@ -14,6 +14,8 @@ public class Dish {
     private String price;
     private Date deleted;
 
+    public Dish(){};
+
     public Dish(int id, String group, String name, String note, String price) {
         this.id = id;
         this.group = group;
