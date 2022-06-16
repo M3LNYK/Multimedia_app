@@ -2,7 +2,9 @@ package com.example.pdfmenu.espressoTests;
 
 import static androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.PositionAssertions.*;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 
@@ -97,5 +99,17 @@ public class EspressoTest {
         onView(withId(R.id.dish_edit_group_autocomplete)).check(matches(isDisplayed()));
     }
 
+//    @Test
+//    public void item_isNotDisplayed() {
+//        onView(withText("TEST DISH")).check(matches(doesNotExist()));
+//    }
+
+    @Test
+    public void addItem_isChanging() {
+        onView(withId(R.id.floating_open)).perform(click());
+        onView(withId(R.id.floating_edit)).perform(click());
+        onView(withId(R.id.outlinedTextField_dish_name)).perform(typeText("TEST DISH"));
+        onView(withText("TEST DISH")).check(matches(isDisplayed()));
+    }
 
 }
